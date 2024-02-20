@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{Creating One Simple Code With Java}
+\author{Marco Antonio Romero Albanez}
+
+\begin{document}
+	
+\maketitle
+
+\section{Escribe un programa en el que el usuario ingrese un número entero positivo. Luego, el programa debe determinar si el número ingresado es par o impar y mostrar un mensaje correspondiente.}
+
+\subsection{Bien, esto sería el pseudocódigo del programa:}
+
+\begin{verbatim}
+	1.Inicio
+	2.Leer x
+	3.z<- x MOD 2
+	4.Si z=1 Entonces
+	5.Escribir "El número introducido es impar"
+	6.SiNo
+	7.Escribir "El número introducido es par"
+	8.Fin Si
+	9.Fin
+	
+\end{verbatim}
+
+\subsection{Ahora se te mostrará un diagrama de actividades para el pseudocódigo anteriormente planteado}
+
+\begin{tikzpicture}[node distance=4cm]
+	\node (start) [startstop] {Inicio};
+	\node (leer) [process, below of=start] {Leer x};
+	\node (modulo) [process, below of=leer] {z $\leftarrow$ x MOD 2};
+	\node (decision) [decision, below of=modulo, yshift=-0.5cm] {z = 1?};
+	\node (impar) [process, below of=decision, yshift=-0.5cm] {Escribir "El número introducido es impar"};
+	\node (par) [process, right of=decision, xshift=2cm] {Escribir "El número introducido es par"};
+	\node (stop) [startstop, below of=impar] {Fin};		
+	\draw [arrow] (start) -- (leer);
+	\draw [arrow] (leer) -- (modulo);
+	\draw [arrow] (modulo) -- (decision);
+	\draw [arrow] (decision) -- node[anchor=east] {Sí} 	(impar);
+	\draw [arrow] (decision) -- node[anchor=south] {No} (par);
+	\draw [arrow] (impar) -- (stop);
+	\draw [arrow] (par) |- (stop);
+\end{tikzpicture}
+
+\subsection{Ahora se le mostrará el código en java que muestra si el número introducido es par o impar}
+
+\begin{verbatim}
+	import java.util.Scanner;
+	
+	public class ImparOrPar {
+		static void Declare(){
+			Scanner Scan= new Scanner(System.in);
+			System.out.println("Bienvenido a mi Código para saber si un número es impar o no");
+			System.out.println("Introuzca el número que desea conocer su paridad (solo pueden ser de tipo entero)");
+			int x = Scan.nextInt();
+			int y = x%2;
+			if (y==1){
+				System.out.println("El número introducido es impar");
+			}else{
+				System.out.println("El número introducido es par");
+			}
+			Scan.close();
+		}
+		public static void main(String[]args){
+			Declare();
+		}
+	}
+	
+\end{verbatim}
+
+\end{document}
